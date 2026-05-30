@@ -17,3 +17,10 @@ vim.api.nvim_create_autocmd("OptionSet", {
         end)
     end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    once = true,
+    callback = function()
+        vim.cmd("Trouble symbols toggle focus=false win.position=right")
+    end,
+})

@@ -4,6 +4,21 @@
 vim.opt.relativenumber = false
 vim.opt.exrc = true
 
+if vim.env.WAYLAND_DISPLAY and vim.fn.executable("wl-copy") == 1 then
+  vim.g.clipboard = {
+    name = "wl-clipboard",
+    copy = {
+      ["+"] = { "wl-copy", "--type", "text/plain" },
+      ["*"] = { "wl-copy", "--primary", "--type", "text/plain" },
+    },
+    paste = {
+      ["+"] = { "wl-paste", "--no-newline" },
+      ["*"] = { "wl-paste", "--no-newline", "--primary" },
+    },
+    cache_enabled = 0,
+  }
+end
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
   callback = function()

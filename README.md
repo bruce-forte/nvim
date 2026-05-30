@@ -27,3 +27,23 @@ Nvim supports Catppuccin so I've added configuration for the flavors (frappe and
 and an auto-loading feature that switches these whenever the terminal theme is switched.
 
 I also trimmed the theme list in `all-themes.lua`.
+
+## Bufferline always visible
+
+Default LazyVim hides the bufferline when only one buffer is open. I prefer it always shown
+so the tab strip doesn't pop in and out. Set via `always_show_bufferline = true` in
+[bufferline.lua](lua/plugins/bufferline.lua).
+
+## Trouble symbols auto-open
+
+Symbols panel (Trouble) opens automatically on the right side on the first LSP attach, so I
+get a code outline without manually toggling it. Width set to 20% of the screen.
+
+- Autocmd: [autocmds.lua](lua/config/autocmds.lua)
+- Width override: [trouble.lua](lua/plugins/trouble.lua)
+
+## Neo-tree width
+
+Explorer (neo-tree) width set to 20% of the screen at startup. Computed from `vim.o.columns`
+in the plugin spec since neo-tree's `window.width` only accepts integer columns, not a
+percentage. See [neo-tree.lua](lua/plugins/neo-tree.lua).
