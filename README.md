@@ -20,6 +20,13 @@ I also added `prettier` as the default formatter for html and json files as it w
 I've added configuration for markdown preview. This is very useful if you want to see it rendered
 in the browser.
 
+## Markdownlint disabled
+
+The LazyVim `lang.markdown` extra wires `markdownlint-cli2` into four places (nvim-lint, conform,
+none-ls, mason). I find its rules noisy, so [disable-markdownlint.lua](lua/plugins/disable-markdownlint.lua)
+strips it from each list via `opts = function(_, opts)` overrides. Mason no longer auto-installs the
+binary either. The rest of the markdown extra (render-markdown, marksman LSP, preview) stays intact.
+
 ## Themes
 
 I'm using Catppuccin in my terminal and I have shortcuts for switching between light and dark.
