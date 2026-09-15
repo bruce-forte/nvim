@@ -51,18 +51,18 @@ local function apply_omarchy_theme()
     pcall(vim.cmd.colorscheme, name)
 end
 
-vim.api.nvim_create_autocmd("OptionSet", {
-    pattern = "background",
-    callback = function()
-        vim.schedule(apply_omarchy_theme)
-    end,
-})
-
 -- theme.name is replaced (not rewritten) on a switch, so watch the directory.
 local theme_watcher = vim.uv.new_fs_event()
 if theme_watcher then
+    -- `omarchy theme set` touches several entries in the directory; coalesce
+    -- the burst into a single apply.
+    local pending
     theme_watcher:start(omarchy_state, {}, function()
-        vim.schedule(apply_omarchy_theme)
+        if pending then pending:stop(); pending:close() end
+        pending = vim.defer_fn(function()
+            pending = nil
+            apply_omarchy_theme()
+        end, 100)
     end)
 
     vim.api.nvim_create_autocmd("VimLeavePre", {
