@@ -3,7 +3,7 @@
 This is my specialized [LazyVim](https://github.com/LazyVim/LazyVim) configuration that solves some
 issues that I had with LazyVim.
 
-## Formtting
+## Formatting
 
 I find indenting with 2 spaces hard to read. This is usually configurable in the formatter
 utilities, but in case of Go everything is set in stone, so I have to set the tab width instead.
